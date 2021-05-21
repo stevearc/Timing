@@ -5,10 +5,13 @@ HERE="$(readlink -f "$(dirname "$0")")"
 SCRIPT="$(mktemp).scd"
 
 cat >"$SCRIPT" <<EOF
-if (Quarks.isInstalled("Timing").not) {
-  Quarks.install("$HERE");
-};
-0.exit;
+Task({
+  if (Quarks.isInstalled("Timing").not) {
+    Quarks.install("$HERE");
+  };
+  5.wait;
+  0.exit;
+}).start;
 EOF
 cat "$SCRIPT"
 sclang "$SCRIPT"
