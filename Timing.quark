@@ -1,0 +1,6 @@
+(
+	\name: 			"Timing",
+	\summary:		"Clock and timing utilities",
+	\author: 		"Steven Arcangeli",
+	\since: 		"2021",
+)

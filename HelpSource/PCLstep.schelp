@@ -1,0 +1,36 @@
+class:: PCLstep
+summary:: Linearly interpolate between values over time
+related:: Classes/PCstep
+categories:: Streams-Patterns-Events>Patterns>Time
+
+DESCRIPTION::
+Similar to link::Classes/PCstep:: except that it will linearly interpolate between values instead of stepping between them.
+
+ClassMethods::
+
+method::new
+
+argument::sequence
+The sequence of values to iterate through. May be an array or a link::Classes/Pattern::.
+
+argument::timing
+The duration to interpolate between values. This can be an link::Classes/Array::, link::Classes/Pattern::, or a single value.
+
+argument::clock
+The clock to use. Defaults to TempoClock.default;
+
+EXAMPLES::
+
+code::
+
+(
+Pbind(
+  // Slowly increase volume for 12 beats, then drop it back down over 4
+  \amp, PCLstep([0.1,0.4],[12,4]),
+  \scale, Scale.minorPentatonic,
+  \degree, Pshuf((0..5).mirror1,inf),
+  \dur, Pwrand([1,0.5,0.25],[0.1,0.5,0.4],inf),
+).play;
+)
+
+::

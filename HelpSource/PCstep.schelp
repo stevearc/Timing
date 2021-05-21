@@ -1,0 +1,47 @@
+class:: PCstep
+summary:: Step through a sequence of values over time
+related:: Classes/PCLstep,Classes/Ptime,Classes/Pclutch
+categories:: Streams-Patterns-Events>Patterns>Time
+
+DESCRIPTION::
+Similar to link::Classes/Pclutch:: in that it will return one item in the sequence until advanced. Where link::Classes/Pclutch:: is manually advanced, PCstep advances according to a link::Classes/TempoClock::. Also differs in how it handles nested patterns (see below).
+
+ClassMethods::
+
+method::new
+
+argument::sequence
+The sequence of values or patterns to iterate through. This can be an link::Classes/Array:: or a link::Classes/Pattern::, though they behave differently. When this is a Pattern it behaves the same as link::Classes/Pclutch::, advancing to the next item in the pattern when time advances. When this is an Array, it will stay on each element for the specified time duration. If that element is a nested Pattern, the PCstep will loop through that pattern. See examples below.
+
+argument::timing
+The duration to stay on each value. This can be an link::Classes/Array::, link::Classes/Pattern::, or a single value.
+
+argument::clock
+The clock to use. Defaults to TempoClock.default;
+
+EXAMPLES::
+
+code::
+
+(
+Pbind(
+  \scale, Scale.minorPentatonic,
+  \degree, Pshuf((0..5).mirror1,inf)
+  // Plays single notes for 12 beats, then plays a chord for 4
+    + PCstep([0,[0,3]], [12,4]),
+  \dur, Pwrand([1,0.5,0.25],[0.1,0.5,0.4],inf),
+).play;
+)
+
+// PCstep is advancing through the sequence array.
+// This will cause it to break out of infinite patterns.
+(
+Pbind(
+  \scale, Scale.minorPentatonic,
+  \degree, Pshuf((0..5).mirror1,inf),
+  \dur, Pwrand([1,0.5,0.25],[0.1,0.5,0.4],inf),
+  // Every 12 beats raise the amp for 4 beats
+  \amp, PCstep([Pwhite(0.09,0.11),Pwhite(0.15,0.2)], [12,4]),
+).play;
+)
+::

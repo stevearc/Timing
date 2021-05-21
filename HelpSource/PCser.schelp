@@ -1,0 +1,38 @@
+class:: PCser
+summary:: Clip or stretch durations to fit a bar
+related:: Classes/Pser,Classes/PCstep
+categories:: Streams-Patterns-Events>Patterns>Time
+
+ClassMethods::
+
+method::new
+
+argument::sequence
+The sequence of durations to iterate through. May be an link::Classes/Array:: or a link::Classes/Pattern::.
+
+argument::beats
+How many beats should the total pattern take. The sequence will be stretched or clipped to this duration.
+
+argument::repeats
+How many times to repeat the sequence.
+
+EXAMPLES::
+
+code::
+
+(
+Pbind(
+  \scale, Scale.minorPentatonic,
+  \degree, Pshuf((0..5).mirror1,inf),
+  \dur, Pxrand([
+    // Play a randomized beat for 2 bars (of 4/4)
+    PCser(Pwrand([0.25,0.5,1], [5,2,1].normalizeSum), 8),
+    // Play 16th notes for 4 bars
+    PCser(0.25, 4),
+    // Play triplets for 2 bars then 8ths for 2 bars
+    PCser(1/3,2) ++ PCser(0.5,2),
+  ],inf),
+).play;
+)
+
+::

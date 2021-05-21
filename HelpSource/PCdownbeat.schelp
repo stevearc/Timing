@@ -1,0 +1,35 @@
+class:: PCdownbeat
+summary:: Alternate way to specify durations on a Pbind
+related:: Classes/Pbind
+categories:: Streams-Patterns-Events>Patterns>Time
+
+DESCRIPTION::
+
+The normal way to specify note lengths in a link::Classes/Pbind:: is using code::\dur::. This can be unintuitive because it specifies the amount of time to the next note, but humans are generally used to specifying *when* the note will hit.
+
+ClassMethods::
+
+method::new
+
+argument::timings
+The array of beats on which notes should be played. This is 1-indexed to match how we talk (e.g. the classic 2/4 snare beat would be code::[2,4]::)
+
+argument::repeats
+How many times to repeat the sequence.
+
+argument::beats
+How many total beats there are in this pattern. If left blank, will round to the closest multiple of 4 (assumes 4/4 time).
+
+EXAMPLES::
+
+code::
+
+(
+Pbind(
+  \scale, Scale.minorPentatonic,
+  \degree, Pshuf((0..5).mirror1,inf),
+  \dur, PCdownbeat([1,1.75,2,2.5,3.5,4,4.25,4.5,4.75],inf),
+).play;
+)
+
+::
