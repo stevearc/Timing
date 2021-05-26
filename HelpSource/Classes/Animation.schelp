@@ -1,0 +1,83 @@
+class:: Animation
+summary:: Change values over time
+categories:: Scheduling
+
+DESCRIPTION::
+
+ClassMethods::
+
+method::lerp
+Linearly interpolate between two values over time, calling the callback at each timestep.
+argument::start
+The value to start interpolating from
+argument::end
+The value to interpolate to
+argument::dur
+The amount of time to take for the interpolation
+argument::tstep
+How much time to wait in between calling the callback
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+argument::callback
+Called every timestep with the new interpolated value.
+returns::
+A link::Classes/Task::
+
+method::elerp
+Interpolates between two values over time using nonlinear methods.
+argument::start
+The value to start interpolating from
+argument::end
+The value to interpolate to
+argument::dur
+The amount of time to take for the interpolation
+argument::curve
+Specifies the curvature of the interpolation. Passed to link::Classes/Env:: (see table for possible values)
+argument::tstep
+How much time to wait in between calling the callback
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+argument::callback
+Called every timestep with the new interpolated value.
+returns::
+A link::Classes/Task::
+
+method::animate
+Interpolates between two values over time as specified by an arbitrary link::Classes/Env::
+argument::env
+An link::Classes/Env::
+argument::tstep
+How much time to wait in between calling the callback
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+argument::callback
+Called every timestep with the new interpolated value.
+returns::
+A link::Classes/Task::
+
+EXAMPLES::
+
+code::
+// Here you can see the exponential interpolation from 0 to 10 over 4 seconds
+Animate.elerp(0, 10, 4, 2, callback: { |v| v.postln });
+
+// You can also specify your own env
+e = Env([0,1,0], [1,1]);
+Animate.animate(e, callback: { |v| v.postln });
+::
+
+There are extension methods on link::Classes/NodeProxy:: and
+link::Classes/Synth:: that make this easier to use for practical applications:
+
+code::
+a = Synth(\default);
+// Fade out the synth over 4 seconds and then free it
+// Note that for synths, the "start" argument can be nil
+a.lerp(\amp, nil, 0, 4, callback: { a.free });
+
+p = ProxySpace.push(s);
+~player = { SinOsc.ar([\freq.kr(440), \freq.kr], 0, 0.2) };
+~player.play;
+// Change the freqency following a custom Env
+~player.animate(\freq, Env([440,220,440], [3,5], [2,-2]))
+::

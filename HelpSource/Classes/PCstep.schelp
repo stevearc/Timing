@@ -16,9 +16,6 @@ The sequence of values or patterns to iterate through. This can be an link::Clas
 argument::timing
 The duration to stay on each value. This can be an link::Classes/Array::, link::Classes/Pattern::, or a single value.
 
-argument::clock
-The clock to use. Defaults to TempoClock.default;
-
 EXAMPLES::
 
 code::

@@ -5,7 +5,7 @@ categories:: Streams-Patterns-Events>Patterns>Time
 
 DESCRIPTION::
 
-The normal way to specify note lengths in a link::Classes/Pbind:: is using code::\dur::. This can be unintuitive because it specifies the amount of time to the next note, but humans are generally used to specifying *when* the note will hit.
+The normal way to specify note lengths in a link::Classes/Pbind:: is using code::\dur::. This can be unintuitive because it specifies the amount of time to the next note, but humans are generally used to specifying emphasis::when:: the note will hit.
 
 ClassMethods::
 

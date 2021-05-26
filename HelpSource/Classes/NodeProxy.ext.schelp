@@ -1,0 +1,53 @@
+InstanceMethods::
+
+method::lerp
+argument::key
+The key to animate. This will be changed using link::#-set::.
+argument::start
+The value to start interpolating from
+argument::end
+The value to interpolate to
+argument::dur
+The amount of time to take for the interpolation
+argument::tstep
+The timestep in between calling link::#-set::
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+returns::
+A link::Classes/Task::
+discussion::
+See link::Classes/Animation:: for more details.
+
+method::elerp
+argument::key
+The key to animate. This will be changed using link::#-set::.
+argument::start
+The value to start interpolating from
+argument::end
+The value to interpolate to
+argument::dur
+The amount of time to take for the interpolation
+argument::curve
+Specifies the curvature of the interpolation. Passed to link::Classes/Env:: (see table for possible values)
+argument::tstep
+The timestep in between calling link::#-set::
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+returns::
+A link::Classes/Task::
+discussion::
+See link::Classes/Animation:: for more details.
+
+method::animate
+argument::key
+The key to animate. This will be changed using link::#-set::.
+argument::env
+An link::Classes/Env::
+argument::tstep
+The timestep in between calling link::#-set::
+argument::clock
+The default is an instance of link::Classes/TempoClock::
+returns::
+A link::Classes/Task::
+discussion::
+See link::Classes/Animation:: for more details.
