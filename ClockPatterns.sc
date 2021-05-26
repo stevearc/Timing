@@ -67,8 +67,8 @@ PCLstep : Pattern {
 
 PCdownbeat : ListPattern {
 	var <>beats;
-	*new { |list, repeats=1, beats=nil|
-		^super.new(list, repeats).beats_(beats)
+	*new { |timings, repeats=1, beats=nil|
+		^super.new(timings, repeats).beats_(beats)
 	}
 	storeArgs { ^[ list, repeats, beats ] }
 
@@ -138,23 +138,5 @@ PCser : Pattern {
 			};
 			idx = idx + 1;
 		}
-	}
-}
-
-+ Array {
-	asSequentialStream {|repeats=1|
-		^Pseq(this, repeats).asStream;
-	}
-}
-
-+ Pattern {
-	asSequentialStream {|repeats=1|
-		^Pn(this, repeats).asStream;
-	}
-}
-
-+ Object {
-	asSequentialStream {|repeats=1|
-		^Pn(this, repeats).asStream;
 	}
 }
