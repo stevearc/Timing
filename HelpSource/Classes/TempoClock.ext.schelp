@@ -1,0 +1,40 @@
+ClassMethods::
+method::bpm
+method::playQuant
+method::playSeq
+
+InstanceMethods::
+
+method::bpm
+Get or set the tempo of the clock in terms of beats-per-minute
+
+method::playQuant
+argument::quant
+This can either be a number that represents the quantization, or it can be an array with a pair of code::[quant, phase]::. For example:
+code::
+// Perform this action 4 beats before the next 16-quantized boundary
+TempoClock.playQuant([16, -4], { "T-minus 4 beats!".postln });
+::
+argument::action
+
+method::playSeq
+Schedule a series of actions for later execution, quantized to a grid.
+argument::quant
+
+argument::... pairs
+This should be a series of paired code::phase, action:: arguments. Each action
+will be executed at the phase given.
+
+code::
+  TempoClock.playSeq(16, -4, {
+    "T-minus 4 beats!".postln;
+  }, -3, {
+    "T-minus 3 beats!".postln;
+  }, -2, {
+    "T-minus 2 beats!".postln;
+  }, -1, {
+    "T-minus 1 beats!".postln;
+  }, 0, {
+    "Blastoff!".postln;
+  });
+::
